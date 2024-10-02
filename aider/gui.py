@@ -419,13 +419,8 @@ class GUI:
 
         while prompt:
             with self.messages.chat_message("assistant"):
-                placeholder = st.empty()
-                full_response = ""
-                for chunk in self.coder.run_stream(prompt):
-                    full_response += chunk
-                    placeholder.markdown(full_response + "▌")
-                placeholder.markdown(full_response)
-                self.state.messages.append({"role": "assistant", "content": full_response})
+                res = st.write_stream(self.coder.run_stream(prompt))
+                self.state.messages.append({"role": "assistant", "content": res})
                 # self.cost()
 
             prompt = None
