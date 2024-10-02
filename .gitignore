@@ -11,5 +11,9 @@ _site
 .jekyll-cache/
 .jekyll-metadata
 aider/__version__.py
+<<<<<<< HEAD
 .env
 .env*
+=======
+.venv/
+>>>>>>> upstream/main
