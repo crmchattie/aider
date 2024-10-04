@@ -66,6 +66,20 @@ def make_new_repo(git_root, io):
     io.tool_output(f"Git repository created in {git_root}")
     return repo
 
+def setup_git_with_new_directory(git_root, io):
+    new_dir_name = io.prompt_ask("Enter the name for the new directory: ")
+    new_dir_path = Path(git_root) / new_dir_name
+    try:
+        new_dir_path.mkdir(parents=True, exist_ok=False)
+        io.tool_output(f"Created new directory: {new_dir_path}")
+        git_root = str(new_dir_path)
+    except FileExistsError:
+        io.tool_error(f"Directory {new_dir_path} already exists. Using the existing directory.")
+    except Exception as e:
+        io.tool_error(f"Error creating directory: {e}")
+        return None
+    
+    return make_new_repo(git_root, io)
 
 def setup_git(git_root, io):
     repo = None
@@ -75,6 +89,9 @@ def setup_git(git_root, io):
     elif Path.cwd() == Path.home():
         io.tool_warning("You should probably run aider in a directory, not your home dir.")
         return
+    elif io.confirm_ask("Do you want to create a new directory for your project?"):
+        git_root = str(Path.cwd().resolve())
+        repo = setup_git_with_new_directory(git_root, io)
     elif io.confirm_ask("No git repo found, create one to track aider's changes (recommended)?"):
         git_root = str(Path.cwd().resolve())
         repo = make_new_repo(git_root, io)
@@ -429,6 +446,7 @@ def main(argv=None, input=None, output=None, force_git_root=None, return_coder=F
             encoding=args.encoding,
             llm_history_file=args.llm_history_file,
             editingmode=editing_mode,
+            project_spec_file=args.project_spec_file,
         )
 
     io = get_io(args.pretty)

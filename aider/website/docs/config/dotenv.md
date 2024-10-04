@@ -135,6 +135,9 @@ cog.outl("```")
 ## Specify what edit format the LLM should use (default depends on model)
 #AIDER_EDIT_FORMAT=
 
+## Use product manager edit format for the main chat
+#AIDER_PRODUCT_MANAGER=
+
 ## Use architect edit format for the main chat
 #AIDER_ARCHITECT=
 

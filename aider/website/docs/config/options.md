@@ -33,8 +33,8 @@ usage: aider [-h] [--openai-api-key] [--anthropic-api-key] [--model]
              [--openai-organization-id] [--model-settings-file]
              [--model-metadata-file]
              [--verify-ssl | --no-verify-ssl] [--edit-format]
-             [--architect] [--weak-model] [--editor-model]
-             [--editor-edit-format]
+             [--product-manager] [--architect] [--weak-model]
+             [--editor-model] [--editor-edit-format]
              [--show-model-warnings | --no-show-model-warnings]
              [--max-chat-history-tokens] [--env-file]
              [--cache-prompts | --no-cache-prompts]
@@ -195,6 +195,10 @@ Environment variable: `AIDER_EDIT_FORMAT`
 Aliases:
   - `--edit-format EDIT_FORMAT`
   - `--chat-mode EDIT_FORMAT`
+
+### `--product-manager`
+Use product manager edit format for the main chat  
+Environment variable: `AIDER_PRODUCT_MANAGER`  
 
 ### `--architect`
 Use architect edit format for the main chat  

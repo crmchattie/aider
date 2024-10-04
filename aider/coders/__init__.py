@@ -6,6 +6,8 @@ from .editblock_fenced_coder import EditBlockFencedCoder
 from .editor_editblock_coder import EditorEditBlockCoder
 from .editor_whole_coder import EditorWholeFileCoder
 from .help_coder import HelpCoder
+from .product_manager_coder import ProductManagerCoder
+from .reviewer_coder import ReviewerCoder
 from .udiff_coder import UnifiedDiffCoder
 from .wholefile_coder import WholeFileCoder
 
@@ -20,7 +22,9 @@ __all__ = [
     WholeFileCoder,
     UnifiedDiffCoder,
     #    SingleWholeFileFunctionCoder,
+    ProductManagerCoder,
     ArchitectCoder,
     EditorEditBlockCoder,
     EditorWholeFileCoder,
+    ReviewerCoder,
 ]

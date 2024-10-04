@@ -14,3 +14,4 @@ aider/__version__.py
 .env
 .env*
 .venv/
+venv/

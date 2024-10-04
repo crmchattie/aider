@@ -183,7 +183,20 @@ class Coder:
         if self.edit_format == "architect":
             output = (
                 f"Editor model: {main_model.editor_model.name} with"
-                f" {main_model.editor_edit_format} edit format"
+                f" {main_model.editor_edit_format} edit format \n"
+                f"Reviewer model: {main_model.reviewer_model.name} with"
+                f" {main_model.reviewer_edit_format} format \n"
+            )
+            lines.append(output)
+        
+        if self.edit_format == "product_manager":
+            output = (
+                f"Architect model: {main_model.architect_model.name} with"
+                f" {main_model.architect_edit_format} format \n"
+                f"Editor model: {main_model.editor_model.name} with"
+                f" {main_model.editor_edit_format} edit format \n"
+                f"Reviewer model: {main_model.reviewer_model.name} with"
+                f" {main_model.reviewer_edit_format} format \n"
             )
             lines.append(output)
 

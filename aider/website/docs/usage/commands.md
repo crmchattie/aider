@@ -34,6 +34,7 @@ cog.out(get_help_md())
 | **/model** | Switch to a new LLM |
 | **/models** | Search the list of available models |
 | **/paste** | Paste image/text from the clipboard into the chat.        Optionally provide a name for the image. |
+| **/product-manager** | Enter product manager mode to discuss high-level project specifications |
 | **/quit** | Exit the application |
 | **/read-only** | Add files to the chat that are for reference, not to be edited |
 | **/report** | Report a problem by opening a GitHub Issue |

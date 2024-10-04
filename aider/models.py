@@ -79,8 +79,15 @@ class ModelSettings:
     use_system_prompt: bool = True
     use_temperature: bool = True
     streaming: bool = True
+    product_manager_edit_format: Optional[str] = None
+    architect_model_name: Optional[str] = None
+    architect_edit_format: Optional[str] = None
     editor_model_name: Optional[str] = None
     editor_edit_format: Optional[str] = None
+    reviewer_edit_format: Optional[str] = None
+    reviewer_model_name: Optional[str] = None
+    documentator_edit_format: Optional[str] = None
+    documentator_model_name: Optional[str] = None
 
 
 # https://platform.openai.com/docs/models/gpt-4-and-gpt-4-turbo
@@ -146,7 +153,11 @@ MODEL_SETTINGS = [
         accepts_images=True,
         lazy=True,
         reminder="sys",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
     ),
     ModelSettings(
         "openai/gpt-4o-2024-08-06",
@@ -156,6 +167,11 @@ MODEL_SETTINGS = [
         accepts_images=True,
         lazy=True,
         reminder="sys",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
+        editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
     ),
     ModelSettings(
         "gpt-4o-2024-08-06",
@@ -165,6 +181,11 @@ MODEL_SETTINGS = [
         accepts_images=True,
         lazy=True,
         reminder="sys",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
+        editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
     ),
     ModelSettings(
         "gpt-4o",
@@ -174,7 +195,11 @@ MODEL_SETTINGS = [
         accepts_images=True,
         lazy=True,
         reminder="sys",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
     ),
     ModelSettings(
         "gpt-4o-mini",
@@ -261,8 +286,15 @@ MODEL_SETTINGS = [
         "claude-3-5-sonnet-20240620",
         "diff",
         weak_model_name="claude-3-haiku-20240307",
+        architect_model_name="claude-3-5-sonnet-20240620",
         editor_model_name="claude-3-5-sonnet-20240620",
+        reviewer_model_name="claude-3-5-sonnet-20240620",
+        documentator_model_name="claude-3-5-sonnet-20240620",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
         use_repo_map=True,
         examples_as_sys_msg=True,
         accepts_images=True,
@@ -279,8 +311,15 @@ MODEL_SETTINGS = [
         "anthropic/claude-3-5-sonnet-20240620",
         "diff",
         weak_model_name="claude-3-haiku-20240307",
+        architect_model_name="anthropic/claude-3-5-sonnet-20240620",
         editor_model_name="anthropic/claude-3-5-sonnet-20240620",
+        reviewer_model_name="anthropic/claude-3-5-sonnet-20240620",
+        documentator_model_name="anthropic/claude-3-5-sonnet-20240620",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
         use_repo_map=True,
         examples_as_sys_msg=True,
         extra_params={
@@ -320,8 +359,15 @@ MODEL_SETTINGS = [
         "openrouter/anthropic/claude-3.5-sonnet",
         "diff",
         weak_model_name="openrouter/anthropic/claude-3-haiku-20240307",
+        architect_model_name="openrouter/anthropic/claude-3.5-sonnet",
         editor_model_name="openrouter/anthropic/claude-3.5-sonnet",
+        reviewer_model_name="openrouter/anthropic/claude-3.5-sonnet",
+        documentator_model_name="openrouter/anthropic/claude-3.5-sonnet",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
         use_repo_map=True,
         examples_as_sys_msg=True,
         accepts_images=True,
@@ -337,8 +383,15 @@ MODEL_SETTINGS = [
         "vertex_ai/claude-3-5-sonnet@20240620",
         "diff",
         weak_model_name="vertex_ai/claude-3-haiku@20240307",
+        architect_model_name="vertex_ai/claude-3-5-sonnet@20240620",
         editor_model_name="vertex_ai/claude-3-5-sonnet@20240620",
+        reviewer_model_name="vertex_ai/claude-3-5-sonnet@20240620",
+        documentator_model_name="vertex_ai/claude-3-5-sonnet@20240620",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
         use_repo_map=True,
         examples_as_sys_msg=True,
         accepts_images=True,
@@ -484,14 +537,25 @@ MODEL_SETTINGS = [
         accepts_images=True,
         lazy=True,
         reminder="sys",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
     ),
     ModelSettings(
-        "openai/o1-mini",
+        "openai/gpt-4o",
         "whole",
         weak_model_name="openai/gpt-4o-mini",
+        architect_model_name="openai/o1-mini",
         editor_model_name="openai/gpt-4o",
+        reviewer_model_name="openai/gpt-4o",
+        documentator_model_name="openai/gpt-4o",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
         use_repo_map=True,
         reminder="user",
         use_system_prompt=False,
@@ -499,11 +563,18 @@ MODEL_SETTINGS = [
         streaming=False,
     ),
     ModelSettings(
-        "o1-mini",
+        "gpt-4o",
         "whole",
         weak_model_name="gpt-4o-mini",
+        architect_model_name="openai/o1-mini",
         editor_model_name="gpt-4o",
+        reviewer_model_name="gpt-4o",
+        documentator_model_name="gpt-4o",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
         use_repo_map=True,
         reminder="user",
         use_system_prompt=False,
@@ -511,11 +582,18 @@ MODEL_SETTINGS = [
         streaming=False,
     ),
     ModelSettings(
-        "openai/o1-preview",
+        "openai/gpt-4o",
         "diff",
         weak_model_name="openai/gpt-4o-mini",
+        architect_model_name="openai/o1-preview",
         editor_model_name="openai/gpt-4o",
+        reviewer_model_name="openai/gpt-4o",
+        documentator_model_name="openai/gpt-4o",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
         use_repo_map=True,
         reminder="user",
         use_system_prompt=False,
@@ -527,7 +605,13 @@ MODEL_SETTINGS = [
         "architect",
         weak_model_name="gpt-4o-mini",
         editor_model_name="gpt-4o",
+        reviewer_model_name="gpt-4o",
+        documentator_model_name="gpt-4o",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
         use_repo_map=True,
         reminder="user",
         use_system_prompt=False,
@@ -535,11 +619,37 @@ MODEL_SETTINGS = [
         streaming=False,
     ),
     ModelSettings(
-        "openrouter/openai/o1-mini",
+        "gpt-4o",
+        "product-manager",
+        weak_model_name="gpt-4o-mini",
+        architect_model_name="o1-preview",
+        editor_model_name="gpt-4o",
+        reviewer_model_name="gpt-4o",
+        documentator_model_name="gpt-4o",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
+        editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
+        use_repo_map=True,
+        reminder="user",
+        use_system_prompt=False,
+        use_temperature=False,
+        streaming=False,
+    ),
+    ModelSettings(
+        "openrouter/openai/gpt-4o",
         "whole",
         weak_model_name="openrouter/openai/gpt-4o-mini",
+        architect_model_name="openrouter/openai/o1-mini",
         editor_model_name="openrouter/openai/gpt-4o",
+        reviewer_model_name="openrouter/openai/gpt-4o",
+        documentator_model_name="openrouter/openai/gpt-4o",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
         use_repo_map=True,
         reminder="user",
         use_system_prompt=False,
@@ -547,11 +657,18 @@ MODEL_SETTINGS = [
         streaming=False,
     ),
     ModelSettings(
-        "openrouter/openai/o1-preview",
+        "openrouter/openai/gpt-4o",
         "diff",
         weak_model_name="openrouter/openai/gpt-4o-mini",
+        architect_model_name="openrouter/openai/o1-preview",
         editor_model_name="openrouter/openai/gpt-4o",
+        reviewer_model_name="openrouter/openai/gpt-4o",
+        documentator_model_name="openrouter/openai/gpt-4o",
+        product_manager_edit_format="product_manager",
+        architect_edit_format="architect",
         editor_edit_format="editor-diff",
+        reviewer_edit_format="reviewer",
+        documentator_edit_format="documentator",
         use_repo_map=True,
         reminder="user",
         use_system_prompt=False,
@@ -634,11 +751,17 @@ def get_model_info(model):
 
 
 class Model(ModelSettings):
-    def __init__(self, model, weak_model=None, editor_model=None, editor_edit_format=None):
+    def __init__(self, model, weak_model=None, architect_model=None, architect_edit_format=None, 
+                 editor_model=None, editor_edit_format=None, 
+                 reviewer_model=None, reviewer_edit_format=None, 
+                 documentator_model=None, documentator_edit_format=None,):
         self.name = model
         self.max_chat_history_tokens = 1024
         self.weak_model = None
+        self.architect_model = None
         self.editor_model = None
+        self.reviewer_model = None
+        self.documentator_model = None
 
         self.info = self.get_model_info(model)
 
@@ -659,11 +782,26 @@ class Model(ModelSettings):
         else:
             self.get_weak_model(weak_model)
 
+        if architect_model is False:
+            self.architect_model_name = None
+        else:
+            self.get_architect_model(architect_model, architect_edit_format)
+
         if editor_model is False:
             self.editor_model_name = None
         else:
             self.get_editor_model(editor_model, editor_edit_format)
-
+        
+        if reviewer_model is False:
+            self.reviewer_model_name = None
+        else:
+            self.get_reviewer_model(reviewer_model, reviewer_edit_format)
+        
+        if documentator_model is False:
+            self.documentator_model_name = None
+        else:
+            self.get_documentator_model(documentator_model, documentator_edit_format)
+        
     def get_model_info(self, model):
         return get_model_info(model)
 
@@ -735,6 +873,26 @@ class Model(ModelSettings):
     def commit_message_models(self):
         return [self.weak_model, self]
 
+    def get_architect_model(self, provided_architect_model_name, architect_edit_format):
+        # If architect_model_name is provided, override the model settings
+        if provided_architect_model_name:
+            self.architect_model_name = provided_architect_model_name
+        if architect_edit_format:
+            self.architect_edit_format = architect_edit_format
+
+        if not self.architect_model_name or self.architect_model_name == self.name:
+            self.architect_model = self
+        else:
+            self.architect_model = Model(
+                self.architect_model_name,
+                architect_model=False,
+            )
+
+        if not self.architect_edit_format:
+            self.architect_edit_format = self.architect_model.edit_format
+
+        return self.architect_model
+
     def get_editor_model(self, provided_editor_model_name, editor_edit_format):
         # If editor_model_name is provided, override the model settings
         if provided_editor_model_name:
@@ -754,6 +912,46 @@ class Model(ModelSettings):
             self.editor_edit_format = self.editor_model.edit_format
 
         return self.editor_model
+    
+    def get_reviewer_model(self, provided_reviewer_model_name, reviewer_edit_format):
+        # If reviewer_model_name is provided, override the model settings
+        if provided_reviewer_model_name:
+            self.reviewer_model_name = provided_reviewer_model_name
+        if reviewer_edit_format:
+            self.reviewer_edit_format = reviewer_edit_format
+
+        if not self.reviewer_model_name or self.reviewer_model_name == self.name:
+            self.reviewer_model = self
+        else:
+            self.reviewer_model = Model(
+                self.reviewer_model_name,
+                reviewer_model=False,
+            )
+
+        if not self.reviewer_edit_format:
+            self.reviewer_edit_format = self.reviewer_model.edit_format
+
+        return self.reviewer_model
+    
+    def get_documentator_model(self, provided_documentator_model_name, documentator_edit_format):
+        # If documentator_model_name is provided, override the model settings
+        if provided_documentator_model_name:
+            self.documentator_model_name = provided_documentator_model_name
+        if documentator_edit_format:
+            self.documentator_edit_format = documentator_edit_format
+
+        if not self.documentator_model_name or self.documentator_model_name == self.name:
+            self.documentator_model = self
+        else:
+            self.documentator_model = Model(
+                self.documentator_model_name,
+                documentator_model=False,
+            )
+
+        if not self.documentator_edit_format:
+            self.documentator_edit_format = self.documentator_model.edit_format
+
+        return self.documentator_model
 
     def tokenizer(self, text):
         return litellm.encode(model=self.name, text=text)

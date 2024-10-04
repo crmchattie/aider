@@ -137,6 +137,9 @@ cog.outl("```")
 ## Specify what edit format the LLM should use (default depends on model)
 #edit-format: xxx
 
+## Use product manager edit format for the main chat
+#product-manager: false
+
 ## Use architect edit format for the main chat
 #architect: false
 

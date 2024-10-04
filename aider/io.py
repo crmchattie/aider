@@ -192,6 +192,7 @@ class InputOutput:
         dry_run=False,
         llm_history_file=None,
         editingmode=EditingMode.EMACS,
+        project_spec_file=None,
     ):
         self.never_prompts = set()
         self.editingmode = editingmode
@@ -253,6 +254,8 @@ class InputOutput:
                 self.tool_error(f"Can't initialize prompt toolkit: {err}")  # non-pretty
         else:
             self.console = Console(force_terminal=False, no_color=True)  # non-pretty
+
+        self.project_spec_file = Path(project_spec_file) if project_spec_file else None
 
     def _get_style(self):
         style_dict = {}
@@ -695,3 +698,37 @@ class InputOutput:
                     " Permission denied."
                 )
                 self.chat_history_file = None  # Disable further attempts to write
+
+    def save_project_specification(self, text, strip=True):
+        if strip:
+            text = text.strip()
+        if not text.endswith("\n"):
+            text += "\n"
+        if self.project_spec_file is not None:
+            try:
+                with self.project_spec_file.open("w", encoding=self.encoding, errors="ignore") as f:
+                    f.write(text)
+            except (PermissionError, OSError):
+                self.tool_error(
+                    f"Warning: Unable to write to project specification file {self.project_spec_file}."
+                    " Permission denied."
+                )
+                self.project_spec_file = None  # Disable further attempts to write
+    
+    def read_project_specification(self):
+        """
+        Reads the contents of the project specification file and returns it as a string.
+
+        Returns:
+            str: The contents of the project specification file, or an empty string if unable to read the file.
+        """
+        if self.project_spec_file is not None:
+            try:
+                with self.project_spec_file.open("r", encoding=self.encoding, errors="ignore") as f:
+                    return f.read()
+            except (FileNotFoundError, PermissionError, OSError):
+                self.tool_error(
+                    f"Warning: Unable to read from project specification file {self.project_spec_file}."
+                    " Permission denied or file not found."
+                )
+        return ""

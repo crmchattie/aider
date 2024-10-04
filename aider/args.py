@@ -198,11 +198,25 @@ def get_parser(default_config_files, git_root):
         help="Specify what edit format the LLM should use (default depends on model)",
     )
     group.add_argument(
+        "--diff",
+        action="store_const",
+        dest="edit_format",
+        const="diff",
+        help="Use diff edit format for the main chat",
+    )
+    group.add_argument(
         "--architect",
         action="store_const",
         dest="edit_format",
         const="architect",
         help="Use architect edit format for the main chat",
+    )
+    group.add_argument(
+        "--product-manager",
+        action="store_const",
+        dest="edit_format",
+        const="product_manager",
+        help="Use product manager edit format for the main chat",
     )
     group.add_argument(
         "--weak-model",
@@ -296,6 +310,9 @@ def get_parser(default_config_files, git_root):
     default_chat_history_file = (
         os.path.join(git_root, ".aider.chat.history.md") if git_root else ".aider.chat.history.md"
     )
+    default_project_spec_file = (
+        os.path.join(git_root, ".aider.project.md") if git_root else ".aider.project.md"
+    )
     group.add_argument(
         "--input-history-file",
         metavar="INPUT_HISTORY_FILE",
@@ -307,6 +324,12 @@ def get_parser(default_config_files, git_root):
         metavar="CHAT_HISTORY_FILE",
         default=default_chat_history_file,
         help=f"Specify the chat history file (default: {default_chat_history_file})",
+    )
+    group.add_argument(
+        "--project-spec-file",
+        metavar="PROJECT_SPEC_FILE",
+        default=default_project_spec_file,
+        help=f"Specify the project specification file (default: {default_project_spec_file})",
     )
     group.add_argument(
         "--restore-chat-history",
