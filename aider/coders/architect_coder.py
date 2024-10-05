@@ -25,6 +25,7 @@ class ArchitectCoder(AskCoder):
         edit_kwargs["total_cost"] = self.total_cost
         edit_kwargs["cache_prompts"] = False
         edit_kwargs["num_cache_warming_pings"] = 0
+        edit_kwargs["summarize_from_coder"] = False
 
         editor_kwargs = dict(io=self.io, from_coder=self)
         editor_kwargs.update(edit_kwargs)
