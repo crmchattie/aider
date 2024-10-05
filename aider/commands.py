@@ -990,9 +990,9 @@ class Commands:
         "Enter architect mode to discuss high-level design and architecture"
         return self._generic_chat_command(args, "architect")
     
-    def cmd_product_manager(self, args):
+    def cmd_delegator(self, args):
         "Enter product manager mode to discuss high-level project specifications"
-        return self._generic_chat_command(args, "product-manager")
+        return self._generic_chat_command(args, "delegator")
 
     def _generic_chat_command(self, args, edit_format):
         if not args.strip():

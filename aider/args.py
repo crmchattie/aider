@@ -212,11 +212,11 @@ def get_parser(default_config_files, git_root):
         help="Use architect edit format for the main chat",
     )
     group.add_argument(
-        "--product-manager",
+        "--delegator",
         action="store_const",
         dest="edit_format",
-        const="product_manager",
-        help="Use product manager edit format for the main chat",
+        const="delegator",
+        help="Use delegator edit format for the main chat",
     )
     group.add_argument(
         "--weak-model",

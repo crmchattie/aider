@@ -1,18 +1,21 @@
-from .orchestrator_prompts import OrchestratorPrompts
+import re
+
+from .delegator_prompts import DelegatorPrompts
 from .ask_coder import AskCoder
 from .base_coder import Coder
 
 
-class OrchestratorCoder(AskCoder):
-    edit_format = "orchestrator"
-    gpt_prompts = OrchestratorPrompts()
+class DelegatorCoder(AskCoder):
+    edit_format = "delegator"
+    gpt_prompts = DelegatorPrompts()
+    architect_marker = "===Architect==="
+    editor_marker = "===Editor==="
 
     def reply_completed(self):
         content = self.partial_response_content
 
         if not self.io.confirm_ask("Start planning and building project?"):
             return
-        
         
         # PRODUCT MANAGER
         pm_kwargs = dict()
@@ -47,7 +50,7 @@ class OrchestratorCoder(AskCoder):
             return
         
         
-        # ARCHITECT
+        # ARCHITECT / EDITOR
         arch_kwargs = dict()
         
         # Use the architect_model from the main_model if it exists, otherwise use the main_model itself
@@ -60,50 +63,26 @@ class OrchestratorCoder(AskCoder):
         architect_kwargs = dict(io=self.io, from_coder=self)
         architect_kwargs.update(arch_kwargs)
 
-        architect_coder = Coder.create(**architect_kwargs)
-        architect_coder.cur_messages = []
-        architect_coder.done_messages = []
-
-        if self.verbose:
-            architect_coder.show_announcements()
-
-        architect_content = architect_coder.run(with_message=product_manager_content, preproc=False)
-
-        self.move_back_cur_messages("I made those changes to the files.")
-        self.total_cost = architect_coder.total_cost
-        self.aider_commit_hashes += architect_coder.aider_commit_hashes
-
-    
-        # EDITOR
-        edit_kwargs = dict()
-        
-        # Use the editor_model from the main_model if it exists, otherwise use the main_model itself
-        editor_model = self.main_model.editor_model or self.main_model
-        
-        edit_kwargs["main_model"] = editor_model
-        edit_kwargs["edit_format"] = self.main_model.editor_edit_format
-        edit_kwargs["suggest_shell_commands"] = False
-        edit_kwargs["map_tokens"] = 0
-        edit_kwargs["total_cost"] = self.total_cost
-        edit_kwargs["cache_prompts"] = False
-        edit_kwargs["num_cache_warming_pings"] = 0
-
-        editor_kwargs = dict(io=self.io, from_coder=self)
-        editor_kwargs.update(edit_kwargs)
-
         while True:
-            editor_coder = Coder.create(**editor_kwargs)
-            editor_coder.cur_messages = []
-            editor_coder.done_messages = []
+            architect_coder = Coder.create(**architect_kwargs)
+            architect_coder.cur_messages = []
+            architect_coder.done_messages = []
 
             if self.verbose:
-                editor_coder.show_announcements()
+                architect_coder.show_announcements()
 
-            editor_response = editor_coder.run(with_message=architect_content, preproc=False)
+            architect_editor_content = architect_coder.run(with_message=product_manager_content, preproc=False)
+            # Extract the Architect content
+            start_architect = architect_editor_content.find(self.architect_marker) + len(self.architect_marker)
+            end_architect = architect_editor_content.find(self.editor_marker)
+            architect_content = architect_editor_content[start_architect:end_architect].strip()
 
-            self.move_back_cur_messages("I made those changes to the files.")
-            self.total_cost = editor_coder.total_cost
-            self.aider_commit_hashes = editor_coder.aider_commit_hashes
+            # Extract the Editor content
+            start_editor = end_architect + len(self.editor_marker)
+            editor_content = architect_editor_content[start_editor:].strip()
+
+            self.total_cost = architect_coder.total_cost
+            self.aider_commit_hashes += architect_coder.aider_commit_hashes
 
             # REVIEWER
             review_kwargs = dict()
@@ -129,17 +108,18 @@ class OrchestratorCoder(AskCoder):
             if self.verbose:
                 reviewer_coder.show_announcements()
 
-            reviewer_response = reviewer_coder.run(with_message=editor_response, preproc=False)
-            architect_content += " " + reviewer_response
+            reviewer_content = reviewer_coder.run(with_message=editor_content, preproc=False)
+            architect_content += " " + reviewer_content
             
             self.total_cost = reviewer_coder.total_cost
             self.aider_commit_hashes = reviewer_coder.aider_commit_hashes
 
-            if "ACCEPTED" in reviewer_response:
+            if "ACCEPTED" in reviewer_content:
                 self.move_back_cur_messages("I reviewed those changes to the files and they look good.")
                 break
             else:
                 self.move_back_cur_messages("I reviewed those changes to the files and they need additional edits.")
+
         
         # DOCUMENTATOR
         document_kwargs = dict()
@@ -165,7 +145,7 @@ class OrchestratorCoder(AskCoder):
         if self.verbose:
             documentator_coder.show_announcements()
 
-        documentator_coder.run(with_message=editor_response, preproc=False)
+        documentator_coder.run(with_message=architect_content, preproc=False)
         
         self.total_cost = documentator_coder.total_cost
         self.aider_commit_hashes = documentator_coder.aider_commit_hashes

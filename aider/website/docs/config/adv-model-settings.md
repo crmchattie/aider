@@ -951,7 +951,7 @@ cog.out("```\n")
   cache_control: false
   caches_by_default: false
   edit_format: architect
-  edit_format: product-manager
+  edit_format: delegator
   editor_edit_format: editor-diff
   editor_model_name: gpt-4o
   examples_as_sys_msg: false

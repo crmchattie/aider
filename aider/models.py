@@ -79,7 +79,9 @@ class ModelSettings:
     use_system_prompt: bool = True
     use_temperature: bool = True
     streaming: bool = True
+    delegator_edit_format: Optional[str] = None
     product_manager_edit_format: Optional[str] = None
+    product_manager_model_name: Optional[str] = None
     architect_model_name: Optional[str] = None
     architect_edit_format: Optional[str] = None
     editor_model_name: Optional[str] = None
@@ -153,6 +155,7 @@ MODEL_SETTINGS = [
         accepts_images=True,
         lazy=True,
         reminder="sys",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -167,6 +170,7 @@ MODEL_SETTINGS = [
         accepts_images=True,
         lazy=True,
         reminder="sys",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -181,6 +185,7 @@ MODEL_SETTINGS = [
         accepts_images=True,
         lazy=True,
         reminder="sys",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -195,6 +200,7 @@ MODEL_SETTINGS = [
         accepts_images=True,
         lazy=True,
         reminder="sys",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -286,10 +292,12 @@ MODEL_SETTINGS = [
         "claude-3-5-sonnet-20240620",
         "diff",
         weak_model_name="claude-3-haiku-20240307",
+        product_manager_model_name="claude-3-5-sonnet-20240620",
         architect_model_name="claude-3-5-sonnet-20240620",
         editor_model_name="claude-3-5-sonnet-20240620",
         reviewer_model_name="claude-3-5-sonnet-20240620",
         documentator_model_name="claude-3-5-sonnet-20240620",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -311,10 +319,12 @@ MODEL_SETTINGS = [
         "anthropic/claude-3-5-sonnet-20240620",
         "diff",
         weak_model_name="claude-3-haiku-20240307",
+        product_manager_model_name="anthropic/claude-3-5-sonnet-20240620",
         architect_model_name="anthropic/claude-3-5-sonnet-20240620",
         editor_model_name="anthropic/claude-3-5-sonnet-20240620",
         reviewer_model_name="anthropic/claude-3-5-sonnet-20240620",
         documentator_model_name="anthropic/claude-3-5-sonnet-20240620",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -359,10 +369,12 @@ MODEL_SETTINGS = [
         "openrouter/anthropic/claude-3.5-sonnet",
         "diff",
         weak_model_name="openrouter/anthropic/claude-3-haiku-20240307",
+        product_manager_model_name="openrouter/anthropic/claude-3.5-sonnet",
         architect_model_name="openrouter/anthropic/claude-3.5-sonnet",
         editor_model_name="openrouter/anthropic/claude-3.5-sonnet",
         reviewer_model_name="openrouter/anthropic/claude-3.5-sonnet",
         documentator_model_name="openrouter/anthropic/claude-3.5-sonnet",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -383,10 +395,12 @@ MODEL_SETTINGS = [
         "vertex_ai/claude-3-5-sonnet@20240620",
         "diff",
         weak_model_name="vertex_ai/claude-3-haiku@20240307",
+        product_manager_model_name="vertex_ai/claude-3-5-sonnet@20240620",
         architect_model_name="vertex_ai/claude-3-5-sonnet@20240620",
         editor_model_name="vertex_ai/claude-3-5-sonnet@20240620",
         reviewer_model_name="vertex_ai/claude-3-5-sonnet@20240620",
         documentator_model_name="vertex_ai/claude-3-5-sonnet@20240620",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -537,6 +551,7 @@ MODEL_SETTINGS = [
         accepts_images=True,
         lazy=True,
         reminder="sys",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -547,10 +562,12 @@ MODEL_SETTINGS = [
         "openai/gpt-4o",
         "whole",
         weak_model_name="openai/gpt-4o-mini",
+        product_manager_model_name="openai/gpt-4o",
         architect_model_name="openai/o1-mini",
         editor_model_name="openai/gpt-4o",
         reviewer_model_name="openai/gpt-4o",
         documentator_model_name="openai/gpt-4o",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -566,10 +583,12 @@ MODEL_SETTINGS = [
         "gpt-4o",
         "whole",
         weak_model_name="gpt-4o-mini",
+        product_manager_model_name="gpt-4o",
         architect_model_name="openai/o1-mini",
         editor_model_name="gpt-4o",
         reviewer_model_name="gpt-4o",
         documentator_model_name="gpt-4o",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -585,10 +604,12 @@ MODEL_SETTINGS = [
         "openai/gpt-4o",
         "diff",
         weak_model_name="openai/gpt-4o-mini",
+        product_manager_model_name="openai/gpt-4o",
         architect_model_name="openai/o1-preview",
         editor_model_name="openai/gpt-4o",
         reviewer_model_name="openai/gpt-4o",
         documentator_model_name="openai/gpt-4o",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -604,9 +625,11 @@ MODEL_SETTINGS = [
         "o1-preview",
         "architect",
         weak_model_name="gpt-4o-mini",
+        product_manager_model_name="gpt-4o",
         editor_model_name="gpt-4o",
         reviewer_model_name="gpt-4o",
         documentator_model_name="gpt-4o",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -620,12 +643,14 @@ MODEL_SETTINGS = [
     ),
     ModelSettings(
         "gpt-4o",
-        "product-manager",
+        "delegator",
         weak_model_name="gpt-4o-mini",
+        product_manager_model_name="gpt-4o",
         architect_model_name="o1-preview",
         editor_model_name="gpt-4o",
         reviewer_model_name="gpt-4o",
         documentator_model_name="gpt-4o",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -641,10 +666,12 @@ MODEL_SETTINGS = [
         "openrouter/openai/gpt-4o",
         "whole",
         weak_model_name="openrouter/openai/gpt-4o-mini",
+        product_manager_model_name="openrouter/openai/gpt-4o",
         architect_model_name="openrouter/openai/o1-mini",
         editor_model_name="openrouter/openai/gpt-4o",
         reviewer_model_name="openrouter/openai/gpt-4o",
         documentator_model_name="openrouter/openai/gpt-4o",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -660,10 +687,12 @@ MODEL_SETTINGS = [
         "openrouter/openai/gpt-4o",
         "diff",
         weak_model_name="openrouter/openai/gpt-4o-mini",
+        product_manager_model_name="openrouter/openai/gpt-4o",
         architect_model_name="openrouter/openai/o1-preview",
         editor_model_name="openrouter/openai/gpt-4o",
         reviewer_model_name="openrouter/openai/gpt-4o",
         documentator_model_name="openrouter/openai/gpt-4o",
+        delegator_edit_format="delegator",
         product_manager_edit_format="product_manager",
         architect_edit_format="architect",
         editor_edit_format="editor-diff",
@@ -751,13 +780,16 @@ def get_model_info(model):
 
 
 class Model(ModelSettings):
-    def __init__(self, model, weak_model=None, architect_model=None, architect_edit_format=None, 
+    def __init__(self, model, weak_model=None, 
+                 product_manager_model=None, product_manager_edit_format=None, 
+                 architect_model=None, architect_edit_format=None, 
                  editor_model=None, editor_edit_format=None, 
                  reviewer_model=None, reviewer_edit_format=None, 
-                 documentator_model=None, documentator_edit_format=None,):
+                 documentator_model=None, documentator_edit_format=None):
         self.name = model
         self.max_chat_history_tokens = 1024
         self.weak_model = None
+        self.product_manager_model = None
         self.architect_model = None
         self.editor_model = None
         self.reviewer_model = None
@@ -781,6 +813,11 @@ class Model(ModelSettings):
             self.weak_model_name = None
         else:
             self.get_weak_model(weak_model)
+        
+        if product_manager_model is False:
+            self.product_manager_model_name = None
+        else:
+            self.get_product_manager_model(product_manager_model, product_manager_edit_format)
 
         if architect_model is False:
             self.architect_model_name = None
@@ -872,6 +909,26 @@ class Model(ModelSettings):
 
     def commit_message_models(self):
         return [self.weak_model, self]
+    
+    def get_product_manager_model(self, provided_product_manager_model_name, product_manager_edit_format):
+        # If product_manager_model_name is provided, override the model settings
+        if provided_product_manager_model_name:
+            self.product_manager_model_name = provided_product_manager_model_name
+        if product_manager_edit_format:
+            self.product_manager_edit_format = product_manager_edit_format
+
+        if not self.product_manager_model_name or self.product_manager_model_name == self.name:
+            self.product_manager_model = self
+        else:
+            self.product_manager_model = Model(
+                self.product_manager_model_name,
+                product_manager_model=False,
+            )
+
+        if not self.product_manager_edit_format:
+            self.product_manager_edit_format = self.product_manager_model.edit_format
+
+        return self.product_manager_model
 
     def get_architect_model(self, provided_architect_model_name, architect_edit_format):
         # If architect_model_name is provided, override the model settings
