@@ -97,6 +97,8 @@ class DelegatorCoder(AskCoder):
             review_kwargs["total_cost"] = self.total_cost
             review_kwargs["cache_prompts"] = False
             review_kwargs["num_cache_warming_pings"] = 0
+            review_kwargs["summarize_from_coder"] = False
+            
 
             reviewer_kwargs = dict(io=self.io, from_coder=self)
             reviewer_kwargs.update(review_kwargs)
@@ -134,6 +136,7 @@ class DelegatorCoder(AskCoder):
         document_kwargs["total_cost"] = self.total_cost
         document_kwargs["cache_prompts"] = False
         document_kwargs["num_cache_warming_pings"] = 0
+        document_kwargs["summarize_from_coder"] = False
 
         documentator_kwargs = dict(io=self.io, from_coder=self)
         documentator_kwargs.update(document_kwargs)
